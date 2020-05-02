@@ -1,5 +1,6 @@
 class Enemy:
-	def __init__ (self, name, health, archetype, attack, loot, xp_amount, crit_chance, hit_rate): #spell/attact list out
+	
+	def __init__ (self, name, health, archetype, attack, loot, xp_amount, crit_chance, hit_rate, description): #spell/attact list out
 		self.archetype = archetype 
 		self.name = name
 		self.health = health
@@ -8,6 +9,7 @@ class Enemy:
 		self.xp_amount = xp_amount #Varies based on tier
 		self.crit_chance = crit_chance
 		self.hit_rate = hit_rate
+		self.description = description
 
 	def decrement_health(self, health_down):
 		self.health = self.health - health_down

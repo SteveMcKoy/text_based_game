@@ -1,6 +1,8 @@
+from items import Item
+
 class Player:
 
-	def __init__(self, name, role, health, max_health, mana, max_mana, stamina, max_stamina, crit_chance, hit_rate, alignment):
+	def __init__(self, name, role, health, max_health, mana, max_mana, stamina, max_stamina, crit_chance, max_damage, hit_rate, alignment):
 		self.name = name
 		self.role = role
 		self.health = health
@@ -8,7 +10,8 @@ class Player:
 		self.mana = mana
 		self.max_mana = max_mana
 		self.stamina = stamina
-		self.max_stamina = max_stamina		
+		self.max_stamina = max_stamina
+		self.max_damage = 20
 		self.crit_chance = crit_chance
 		self.hit_rate = hit_rate
 		self.level = 1
@@ -20,7 +23,11 @@ class Player:
 		self.head_gear = "tin plate helmet"
 		self.body_armour = "tin plate armour"
 		self.attacks = ["[|(2)]sword swing", "[*(2)]magic arrow"]
-		self.items = ["minor health potion", "minor health potion", "minor health potion"]
+		compendium = ["magic", "mushroom wood"]
+
+		minor_health_potion = Item("minor health potion", 0, None, 0, None, 15, 0, 0, "An opaque, rust collored mixture. It has no taste, but has a consistancy disgustingly similar to mucus. It's dull color is a reflection of its poor quality due to cheap materials.")
+		self.items = [minor_health_potion, minor_health_potion, minor_health_potion]
+
 
 	def decrement_health(self, health_down):
 		self.health = self.health - health_down
@@ -64,4 +71,19 @@ class Player:
 	def add_item(self, item_added):
 		self.items.append(item_added)
 	def delete_item(self, item_deleted):
-		self.items.remove(item_deleted)
+		i = 0
+		for item in self.items:
+			if item.name == item_deleted:
+				del self.items[i]
+				break
+			i += 1
+	def check_item(self, item_check):
+		for item in self.items:
+			if item.name == item_check:
+				return True
+		return False
+		
+	def add_entry(self, entry_added):
+		self.compendium.append(entry_added)
+	def delete_entry(self, entry_deleted):
+		self.compendium.remove(entry_deleted)
